@@ -1,31 +1,6 @@
 # define a method that bound to class not instance of class
 # must have class as parameter
 
-class skincare:
-    total_brands = 0  # Class attribute
-
-    def __init__(self, quantity, price):
-        self.quantity = quantity
-        self.price = price
-        skincare.total_brands += 1
-
-    @classmethod
-    def get_total_brands(cls):
-        return cls.total_brands
-
-    @classmethod
-    def cleanser(cls, price):
-        return cls(200, price)  # Assuming fixed quantity 200ml
-
-# Object 
-skincare1 = skincare(100, 150)
-skincare2 = skincare(150, 100)
-skincare3 = skincare.cleanser(300)  
-
-
-print(f"Total brands: {skincare.get_total_brands()}")
-print(f"Skincare 3 is a {skincare3.quantity}ml product priced at ₹{skincare3.price}")
-
 class student:
     count = 0  
 
