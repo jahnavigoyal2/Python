@@ -1,0 +1,69 @@
+#suppose i dont know which payment method user will choose or what amount it will pay then
+class PaymentMethod:
+    def pay(self, amount):
+        raise NotImplementedError("not impemented")
+    
+class CreditCard(PaymentMethod):
+    def pay(self, amount):
+        print(f"Paid {amount} using Credit card")
+        
+class UPI(PaymentMethod):
+    def pay(self, amount):
+        print(f"Paid {amount} using UPI")
+
+class Cash(PaymentMethod):
+    def pay(self, amount):
+        print(f"Paid {amount} using Cash")
+
+def checkout(payment_method, amount):
+    try:
+        payment_method.pay(amount)
+    except AttributeError:
+        print("Invalid")
+    except Exception as e:
+        print("error during payment:", e)
+
+credit = CreditCard()
+upi = UPI()
+cash = Cash()
+
+checkout(credit, 200)
+checkout(upi, 200)
+checkout(cash, 200)
+
+#using init and try except
+class PaymentMethod:
+    def __init__(self, amount):
+        self.pay(amount)
+
+    def pay(self, amount):
+        raise NotImplementedError("pay method not implemented")
+
+
+class CreditCard(PaymentMethod):
+    def pay(self, amount):
+        print(f"Paid ₹{amount} using Credit Card")
+
+
+class UPI(PaymentMethod):
+    def pay(self, amount):
+        print(f"Paid ₹{amount} using UPI")
+
+
+class Cash(PaymentMethod):
+    def pay(self, amount):
+        print(f"Paid ₹{amount} using Cash")
+
+
+payment_options = {"credit": CreditCard, "upi": UPI, "cash": Cash}
+
+method = input("Enter payment method (credit/upi/cash): ").strip().lower()
+try:
+    amount = float(input("Enter amount: ₹"))
+
+    if method in payment_options:
+        payment_obj = payment_options[method](amount) 
+    else:
+        print("Invalid method selected.")
+except ValueError:
+    print("Invalid amount entered.")
